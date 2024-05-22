@@ -1,40 +1,41 @@
 class ProbeRs < Formula
   desc "A collection of on chip debugging tools to communicate with microchips."
-  homepage "https://github.com/probe-rs/probe-rs"
-  version "0.23.0"
-  on_macos do
-    on_arm do
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.23.0/probe-rs-aarch64-apple-darwin.tar.xz"
-      sha256 "7a1f10a074ed7e02fa010aed11f3af8bd200473f07274bd819a0920d9adb7dd7"
+  homepage "https://probe.rs"
+  version "0.24.0"
+  if OS.mac?
+    if Hardware::CPU.arm?
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-aarch64-apple-darwin.tar.xz"
+      sha256 "7140d9c2c61f8712ba15887f74df0cb40a7b16728ec86d5f45cc93fe96a0a29a"
     end
-    on_intel do
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.23.0/probe-rs-x86_64-apple-darwin.tar.xz"
-      sha256 "6feec6fb0ee95c44ab217999aa503a696538c1cd97f1a4addb677908d3799b75"
+    if Hardware::CPU.intel?
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-x86_64-apple-darwin.tar.xz"
+      sha256 "0e35cc92ff34af1b1c72dd444e6ddd57c039ed31c2987e37578864211e843cf1"
     end
   end
-  on_linux do
-    on_intel do
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.23.0/probe-rs-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "5f3b06971102921687cda3c5d3070ff8b7dd9698e7b7bdc73cec048c65f94107"
+  if OS.linux?
+    if Hardware::CPU.arm?
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "95d91ebe08868d5119a698e3268ff60a4d71d72afa26ab207d43c807c729c90a"
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "21e8d7df39fa0cdc9a0421e0ac2ac5ba81ec295ea11306f26846089f6fe975c0"
     end
   end
   license "MIT OR Apache-2.0"
 
   def install
-    on_macos do
-      on_arm do
-        bin.install "cargo-embed", "cargo-flash", "probe-rs"
-      end
+    if OS.mac? && Hardware::CPU.arm?
+      bin.install "cargo-embed", "cargo-flash", "probe-rs"
     end
-    on_macos do
-      on_intel do
-        bin.install "cargo-embed", "cargo-flash", "probe-rs"
-      end
+    if OS.mac? && Hardware::CPU.intel?
+      bin.install "cargo-embed", "cargo-flash", "probe-rs"
     end
-    on_linux do
-      on_intel do
-        bin.install "cargo-embed", "cargo-flash", "probe-rs"
-      end
+    if OS.linux? && Hardware::CPU.arm?
+      bin.install "cargo-embed", "cargo-flash", "probe-rs"
+    end
+    if OS.linux? && Hardware::CPU.intel?
+      bin.install "cargo-embed", "cargo-flash", "probe-rs"
     end
 
     # Homebrew will automatically install these, so we don't need to do that
@@ -43,6 +44,6 @@ class ProbeRs < Formula
 
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
-    pkgshare.install *leftover_contents unless leftover_contents.empty?
+    pkgshare.install(*leftover_contents) unless leftover_contents.empty?
   end
 end
