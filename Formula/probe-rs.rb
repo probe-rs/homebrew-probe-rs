@@ -1,42 +1,59 @@
 class ProbeRs < Formula
   desc "A collection of on chip debugging tools to communicate with microchips."
   homepage "https://probe.rs"
-  version "0.24.0"
+  version "0.25.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-aarch64-apple-darwin.tar.xz"
-      sha256 "7140d9c2c61f8712ba15887f74df0cb40a7b16728ec86d5f45cc93fe96a0a29a"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.25.0/probe-rs-tools-aarch64-apple-darwin.tar.xz"
+      sha256 "caad242802014ed87fecd0e92cda81898e723a4e999c4e12a8fa0ebb0931dab3"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-x86_64-apple-darwin.tar.xz"
-      sha256 "0e35cc92ff34af1b1c72dd444e6ddd57c039ed31c2987e37578864211e843cf1"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.25.0/probe-rs-tools-x86_64-apple-darwin.tar.xz"
+      sha256 "0ee4ac219020f302c3885203ec08ebe7b72d65ffb7ddc7d6d41b51df1201a828"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "95d91ebe08868d5119a698e3268ff60a4d71d72afa26ab207d43c807c729c90a"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.25.0/probe-rs-tools-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "1ad4a634a764bbc2ec18229542c53329e88f983fc43d492f932a26549579c92e"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.24.0/probe-rs-tools-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "21e8d7df39fa0cdc9a0421e0ac2ac5ba81ec295ea11306f26846089f6fe975c0"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.25.0/probe-rs-tools-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "270f7e14e5d348d50d5a4d9a7cdad0ed218812b28f3a9d92cc7e18b8b2febe41"
     end
   end
-  license "MIT OR Apache-2.0"
+  license any_of: ["MIT", "Apache-2.0"]
+
+  BINARY_ALIASES = {
+    "aarch64-apple-darwin":      {},
+    "aarch64-unknown-linux-gnu": {},
+    "x86_64-apple-darwin":       {},
+    "x86_64-pc-windows-gnu":     {},
+    "x86_64-unknown-linux-gnu":  {},
+  }.freeze
+
+  def target_triple
+    cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
+    os = OS.mac? ? "apple-darwin" : "unknown-linux-gnu"
+
+    "#{cpu}-#{os}"
+  end
+
+  def install_binary_aliases!
+    BINARY_ALIASES[target_triple.to_sym].each do |source, dests|
+      dests.each do |dest|
+        bin.install_symlink bin/source.to_s => dest
+      end
+    end
+  end
 
   def install
-    if OS.mac? && Hardware::CPU.arm?
-      bin.install "cargo-embed", "cargo-flash", "probe-rs"
-    end
-    if OS.mac? && Hardware::CPU.intel?
-      bin.install "cargo-embed", "cargo-flash", "probe-rs"
-    end
-    if OS.linux? && Hardware::CPU.arm?
-      bin.install "cargo-embed", "cargo-flash", "probe-rs"
-    end
-    if OS.linux? && Hardware::CPU.intel?
-      bin.install "cargo-embed", "cargo-flash", "probe-rs"
-    end
+    bin.install "cargo-embed", "cargo-flash", "probe-rs" if OS.mac? && Hardware::CPU.arm?
+    bin.install "cargo-embed", "cargo-flash", "probe-rs" if OS.mac? && Hardware::CPU.intel?
+    bin.install "cargo-embed", "cargo-flash", "probe-rs" if OS.linux? && Hardware::CPU.arm?
+    bin.install "cargo-embed", "cargo-flash", "probe-rs" if OS.linux? && Hardware::CPU.intel?
+
+    install_binary_aliases!
 
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
