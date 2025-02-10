@@ -1,25 +1,25 @@
 class Rtthost < Formula
   desc "RTT (Real-Time Transfer) client"
   homepage "https://github.com/probe-rs/probe-rs"
-  version "0.26.0"
+  version "0.27.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.26.0/rtthost-aarch64-apple-darwin.tar.xz"
-      sha256 "1d6c0a9d55dfdf771a8dbae63e543f3fdfa4fd569af48f7bdfa3439454e982fc"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.27.0/rtthost-aarch64-apple-darwin.tar.xz"
+      sha256 "33ec8daf81d24b2809ecda364bd81e7d99f56153ef391b042cb427eb90d6a83a"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.26.0/rtthost-x86_64-apple-darwin.tar.xz"
-      sha256 "858ab963d96ce4d1b038b529757b79e47e7e0882a05c711a07417c7f2d768dd9"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.27.0/rtthost-x86_64-apple-darwin.tar.xz"
+      sha256 "4e8fd037ab76be7994a91e9c0fae87d1ada9b06385a0eff822ae9feee0373d00"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.26.0/rtthost-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "0bf293b48d5eccf9dff55b302f750e61e0917dd37fcc10ea2e94ce72acc28a99"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.27.0/rtthost-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "6eb5ccdbdbfbfec47be1b2945ec7615575769519387bdd75211d41a669fb8ae8"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.26.0/rtthost-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "ea864cc3eb38d74de57b4f649b5510d462e19b7270ac92ed7f9b10aa0ab397a6"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.27.0/rtthost-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "0435f60b91067c9e775cf53a0cde68d470f235aaef4a2d82a929ca2daacf3f36"
     end
   end
   license "MIT"
