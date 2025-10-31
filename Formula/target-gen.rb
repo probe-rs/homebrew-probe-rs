@@ -1,25 +1,25 @@
 class TargetGen < Formula
   desc "A cli tool to create new target files for probe-rs ot of CMSIS-Packs."
   homepage "https://github.com/probe-rs/probe-rs"
-  version "0.29.1"
+  version "0.30.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.29.1/target-gen-aarch64-apple-darwin.tar.xz"
-      sha256 "e6521843f3d7b36478af997b5f6243bb738039fafbed82b7557ca6c08b28e712"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/target-gen-aarch64-apple-darwin.tar.xz"
+      sha256 "1b9957c2f494afc462e1ea47b8ec8bfcd18d317e209a3fdc034b93efcdae36c2"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.29.1/target-gen-x86_64-apple-darwin.tar.xz"
-      sha256 "de752684e92880612d97cf520f4b708cdd33315894d99c0810c60b608f3ef051"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/target-gen-x86_64-apple-darwin.tar.xz"
+      sha256 "c19fae70cca4ff20e51bb57a078e9ccb1bc26373379bb8dc515f053ed68f8517"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.29.1/target-gen-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "cf3759360ac2cddaeb649b887f47cd234a614c096359045a66b95e68b66fd679"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/target-gen-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "5f80c034f1a22cefbef1bc07be82d75c8a5015a78026643cf97d42f6c128a052"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.29.1/target-gen-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "48a527171cb277c9307f2dd2e73045dd3f5172c8eb42a0611949960d8f78bf38"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/target-gen-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "242a97a51ff2dc78c558410a98b031aabc0e26d0773cacca5dd6646326997ade"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
