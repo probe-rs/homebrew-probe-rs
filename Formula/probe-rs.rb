@@ -1,25 +1,25 @@
 class ProbeRs < Formula
   desc "A collection of on chip debugging tools to communicate with microchips."
   homepage "https://probe.rs"
-  version "0.30.0"
+  version "0.31.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/probe-rs-tools-aarch64-apple-darwin.tar.xz"
-      sha256 "aaf0706747dd59fac2987a1d22654f0f2a51f9288689e919c476cf25fe7b2bfe"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.31.0/probe-rs-tools-aarch64-apple-darwin.tar.xz"
+      sha256 "ade07f1172a5cc17f8d465bc3d2651e7d06212ef79d150d5b10c7a867a192151"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/probe-rs-tools-x86_64-apple-darwin.tar.xz"
-      sha256 "b9c115d36f07f0f1fd7830ef71a9787bc7b95a3f6c989f62cd456647b303b6b3"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.31.0/probe-rs-tools-x86_64-apple-darwin.tar.xz"
+      sha256 "2ddda8dc7531b6896b585c738e54a255a21ff3b790f4089333e0da63b7856bc1"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/probe-rs-tools-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "fd4bae725ab0cb75cae526ec0b4eef09e2aac3f3f51847d61aa1eac092f2b92e"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.31.0/probe-rs-tools-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "80e4235c3262bf42e93a024124af37d3ddcf05b16bbc3b5b57eff8623061e385"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/probe-rs/probe-rs/releases/download/v0.30.0/probe-rs-tools-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "f35b6bc7c8312811e86687ccdbde4386ce63df12aeab79238c7c5fc86dd31046"
+      url "https://github.com/probe-rs/probe-rs/releases/download/v0.31.0/probe-rs-tools-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "25e6c6792914994cd0b7a6d2f90f28c17ac22a45af8f4424e9a0f44a60ee85f2"
     end
   end
   license any_of: ["MIT", "Apache-2.0"]
